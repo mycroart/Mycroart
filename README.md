@@ -132,7 +132,7 @@
   </div>
 
   <footer>
-    © 2025 Mycro Arts | Designed with ❤️
+    © 2025 Mycro Arts | Designed with @perf.cut 
   </footer>
 
 </body>
