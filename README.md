@@ -45,19 +45,50 @@
       color: #ff5e57;
     }
 
-    .gallery {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
+    /* DECUSSATION SCROLLING STYLES */
+    .scroll-gallery-wrapper {
+      overflow: hidden;
+      height: 220px;
+      position: relative;
       margin-bottom: 2rem;
     }
 
-    .gallery img {
-      width: 30%;
-      border-radius: 10px;
+    .scroll-row {
+      display: flex;
+      width: max-content;
+      gap: 1rem;
+      animation: scroll-left 20s linear infinite;
+    }
+
+    .scroll-row.reverse {
+      animation: scroll-right 25s linear infinite;
+      margin-top: 1rem;
+    }
+
+    .scroll-row img {
+      width: 200px;
+      height: 200px;
       object-fit: cover;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes scroll-right {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(50%);
+      }
     }
 
     form {
@@ -98,6 +129,11 @@
       font-size: 0.9rem;
       color: #555;
     }
+
+    footer a {
+      color: #ff5e57;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -109,10 +145,23 @@
 
   <div class="container">
     <h2>🎨 Our Work</h2>
-    <div class="gallery">
-      <img src="sample1.jpg" alt="Micro Art Sample 1">
-      <img src="sample2.jpg" alt="Micro Art Sample 2">
-      <img src="sample3.jpg" alt="Micro Art Sample 3">
+    <div class="scroll-gallery-wrapper">
+      <div class="scroll-row">
+        <img src="sample1.jpg" alt="Micro Art 1">
+        <img src="sample2.jpg" alt="Micro Art 2">
+        <img src="sample3.jpg" alt="Micro Art 3">
+        <img src="sample1.jpg" alt="Micro Art 1">
+        <img src="sample2.jpg" alt="Micro Art 2">
+        <img src="sample3.jpg" alt="Micro Art 3">
+      </div>
+      <div class="scroll-row reverse">
+        <img src="sample3.jpg" alt="Micro Art 3">
+        <img src="sample2.jpg" alt="Micro Art 2">
+        <img src="sample1.jpg" alt="Micro Art 1">
+        <img src="sample3.jpg" alt="Micro Art 3">
+        <img src="sample2.jpg" alt="Micro Art 2">
+        <img src="sample1.jpg" alt="Micro Art 1">
+      </div>
     </div>
 
     <h2>🛒 Place Your Order</h2>
@@ -143,9 +192,9 @@
   </div>
 
   <footer>
-    © 2025 Mycro Arts | Designed with ❤️ by Perfcut
+    © 2025 Mycro Arts | Designed with ❤️ by 
+    <a href="https://instagram.com/perf.cut" target="_blank">Perfcut</a>
   </footer>
 
 </body>
 </html>
-© 2025 Mycro Arts | Designed with ❤️ by <a href="https://instagram.com/perf.cut" target="_blank" style="color:#ff5e57; text-decoration:none;">Perfcut</a>
