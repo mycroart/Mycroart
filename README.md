@@ -1,16 +1,139 @@
-## Hi there 👋
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mycro Arts | Micro Art</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #ffecd2, #fcb69f);
+      color: #333;
+    }
 
-<!--
-**mycroart/Mycroart** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+    header {
+      background: #ff5e57;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
 
-Here are some ideas to get you started:
+    .container {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+    h2 {
+      color: #ff5e57;
+    }
+
+    .gallery {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .gallery img {
+      width: 30%;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, select, textarea {
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #ff5e57;
+      color: white;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .note {
+      background: #ffe0dc;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    Mycro Arts – Tiny Masterpieces
+  </header>
+
+  <div class="container">
+    <h2>🎨 Our Work</h2>
+    <div class="gallery">
+      <img src="sample1.jpg" alt="Micro Art Sample 1">
+      <img src="sample2.jpg" alt="Micro Art Sample 2">
+      <img src="sample3.jpg" alt="Micro Art Sample 3">
+    </div>
+
+    <h2>🛒 Place Your Order</h2>
+    <form>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <input type="text" name="location" placeholder="Location" required />
+      <input type="text" name="pincode" placeholder="Pincode" required />
+
+      <label for="product">Type of Product:</label>
+      <select name="product" id="product" required>
+        <option value="">-- Select --</option>
+        <option value="chalk">Chalk Art (Custom Name)</option>
+        <option value="pencil">Pencil Lid Art (Custom Name)</option>
+      </select>
+
+      <textarea placeholder="Any special request?" rows="3"></textarea>
+
+      <button type="submit">Submit Request</button>
+    </form>
+
+    <div class="note">
+      📍 <strong>Order Method:</strong><br>
+      1. Direct message us on Instagram: <a href="https://instagram.com/mycro_arts" target="_blank">@mycro_arts</a><br>
+      2. Web page order available only for <strong>Nagapattinam-611 101</strong> surroundings (District of Tamil Nadu)<br><br>
+      📧 Email: <a href="mailto:miiicroartz@gmail.com">miiicroartz@gmail.com</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Mycro Arts | Designed with ❤️
+  </footer>
+
+</body>
+</html>
