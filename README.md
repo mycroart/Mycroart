@@ -20,6 +20,16 @@
       font-size: 2rem;
       font-weight: bold;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    header img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
     }
 
     .container {
@@ -93,6 +103,7 @@
 <body>
 
   <header>
+    <img src="mycrologo.png" alt="Mycro Arts Logo">
     Mycro Arts – Tiny Masterpieces
   </header>
 
@@ -132,8 +143,9 @@
   </div>
 
   <footer>
-    © 2025 Mycro Arts | Designed with @perf.cut 
+    © 2025 Mycro Arts | Designed with ❤️ by Perfcut
   </footer>
 
 </body>
 </html>
+© 2025 Mycro Arts | Designed with ❤️ by <a href="https://instagram.com/perf.cut" target="_blank" style="color:#ff5e57; text-decoration:none;">Perfcut</a>
