@@ -126,16 +126,20 @@
       text-decoration: none;
     }
 
-    .success-message {
-      color: green;
-      margin-top: 1rem;
+    #formMessage {
+      display: none;
       font-weight: bold;
+      padding: 10px;
+      margin-top: 1rem;
+      border-radius: 8px;
     }
 
-    .error-message {
+    #formMessage.success {
+      color: green;
+    }
+
+    #formMessage.error {
       color: red;
-      margin-top: 1rem;
-      font-weight: bold;
     }
   </style>
 </head>
@@ -168,23 +172,23 @@
     </div>
 
     <h2>🛒 Place Your Order</h2>
-    <form id="orderForm" onsubmit="sendMail(); return false;">
-      <input type="text" id="name" name="name" placeholder="Your Name" required />
-      <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
-      <input type="text" id="location" name="location" placeholder="Location" required />
-      <input type="text" id="pincode" name="pincode" placeholder="Pincode" required />
+    <form id="orderForm" action="https://formspree.io/f/xblkrqbp" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <input type="text" name="location" placeholder="Location" required />
+      <input type="text" name="pincode" placeholder="Pincode" required />
 
       <label for="product">Type of Product:</label>
-      <select id="product" name="product" required>
+      <select name="product" required>
         <option value="">-- Select --</option>
         <option value="chalk">Chalk Art (Custom Name)</option>
         <option value="pencil">Pencil Lid Art (Custom Name)</option>
       </select>
 
-      <textarea id="request" name="request" placeholder="Any special request?" rows="3"></textarea>
+      <textarea name="request" placeholder="Any special request?" rows="3"></textarea>
 
       <button type="submit">Submit Request</button>
-      <p id="responseMessage"></p>
+      <p id="formMessage"></p>
     </form>
 
     <div class="note">
@@ -200,34 +204,37 @@
     <a href="https://instagram.com/perf.cut" target="_blank">Perfcut</a>
   </footer>
 
-  <!-- EmailJS Script -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- Success Message Script -->
   <script>
-    (function() {
-      emailjs.init("xQ7QIVsWyjaThv_u9");
-    })();
+    const form = document.getElementById("orderForm");
+    const msg = document.getElementById("formMessage");
 
-    function sendMail() {
-      var params = {
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        location: document.getElementById("location").value,
-        pincode: document.getElementById("pincode").value,
-        product: document.getElementById("product").value,
-        request: document.getElementById("request").value,
-      };
-
-      emailjs.send("service_formycro", "template_yrp8xsf", params)
-        .then(function(response) {
-          document.getElementById("responseMessage").textContent = "✅ Your order has been placed successfully!";
-          document.getElementById("responseMessage").className = "success-message";
-          document.getElementById("orderForm").reset();
-        }, function(error) {
-          document.getElementById("responseMessage").textContent = "❌ Order failed. Please try again.";
-          document.getElementById("responseMessage").className = "error-message";
-          console.error("EmailJS Error:", error);
-        });
-    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          msg.textContent = "✅ Your order has been placed successfully!";
+          msg.className = "success";
+          msg.style.display = "block";
+          form.reset();
+        } else {
+          msg.textContent = "❌ Failed to send your order. Try again.";
+          msg.className = "error";
+          msg.style.display = "block";
+        }
+      }).catch(error => {
+        msg.textContent = "❌ Error! Please check your connection.";
+        msg.className = "error";
+        msg.style.display = "block";
+      });
+    });
   </script>
 
 </body>
