@@ -45,7 +45,6 @@
       color: #ff5e57;
     }
 
-    /* DECUSSATION SCROLLING STYLES */
     .scroll-gallery-wrapper {
       overflow: hidden;
       height: 220px;
@@ -74,21 +73,13 @@
     }
 
     @keyframes scroll-left {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     @keyframes scroll-right {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
     }
 
     form {
@@ -150,35 +141,35 @@
         <img src="sample1.jpg" alt="Micro Art 1">
         <img src="sample2.jpg" alt="Micro Art 2">
         <img src="sample3.jpg" alt="Micro Art 3">
+        <img src="sample4.jpg" alt="Micro Art 4">
         <img src="sample1.jpg" alt="Micro Art 1">
         <img src="sample2.jpg" alt="Micro Art 2">
-        <img src="sample3.jpg" alt="Micro Art 3">
       </div>
       <div class="scroll-row reverse">
         <img src="sample3.jpg" alt="Micro Art 3">
+        <img src="sample4.jpg" alt="Micro Art 4">
         <img src="sample2.jpg" alt="Micro Art 2">
         <img src="sample1.jpg" alt="Micro Art 1">
+        <img src="sample4.jpg" alt="Micro Art 4">
         <img src="sample3.jpg" alt="Micro Art 3">
-        <img src="sample2.jpg" alt="Micro Art 2">
-        <img src="sample1.jpg" alt="Micro Art 1">
       </div>
     </div>
 
     <h2>🛒 Place Your Order</h2>
-    <form>
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="tel" name="phone" placeholder="Phone Number" required />
-      <input type="text" name="location" placeholder="Location" required />
-      <input type="text" name="pincode" placeholder="Pincode" required />
+    <form onsubmit="sendMail(); return false;">
+      <input type="text" id="name" name="name" placeholder="Your Name" required />
+      <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
+      <input type="text" id="location" name="location" placeholder="Location" required />
+      <input type="text" id="pincode" name="pincode" placeholder="Pincode" required />
 
       <label for="product">Type of Product:</label>
-      <select name="product" id="product" required>
+      <select id="product" name="product" required>
         <option value="">-- Select --</option>
         <option value="chalk">Chalk Art (Custom Name)</option>
         <option value="pencil">Pencil Lid Art (Custom Name)</option>
       </select>
 
-      <textarea placeholder="Any special request?" rows="3"></textarea>
+      <textarea id="request" name="request" placeholder="Any special request?" rows="3"></textarea>
 
       <button type="submit">Submit Request</button>
     </form>
@@ -195,6 +186,33 @@
     © 2025 Mycro Arts | Designed with ❤️ by 
     <a href="https://instagram.com/perf.cut" target="_blank">Perfcut</a>
   </footer>
+
+  <!-- EmailJS Script -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("OJ8DBc3Ilixz-Lhz2");
+    })();
+
+    function sendMail() {
+      var params = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        location: document.getElementById("location").value,
+        pincode: document.getElementById("pincode").value,
+        product: document.getElementById("product").value,
+        request: document.getElementById("request").value,
+      };
+
+      emailjs.send("service_formycro", "template_yrp8xsf", params)
+        .then(function(response) {
+          alert("✅ Your order has been sent successfully!");
+        }, function(error) {
+          alert("❌ Failed to send. Please try again later.");
+          console.log(error);
+        });
+    }
+  </script>
 
 </body>
 </html>
