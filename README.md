@@ -125,6 +125,18 @@
       color: #ff5e57;
       text-decoration: none;
     }
+
+    .success-message {
+      color: green;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -156,7 +168,7 @@
     </div>
 
     <h2>🛒 Place Your Order</h2>
-    <form onsubmit="sendMail(); return false;">
+    <form id="orderForm" onsubmit="sendMail(); return false;">
       <input type="text" id="name" name="name" placeholder="Your Name" required />
       <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
       <input type="text" id="location" name="location" placeholder="Location" required />
@@ -172,6 +184,7 @@
       <textarea id="request" name="request" placeholder="Any special request?" rows="3"></textarea>
 
       <button type="submit">Submit Request</button>
+      <p id="responseMessage"></p>
     </form>
 
     <div class="note">
@@ -191,7 +204,7 @@
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
     (function() {
-      emailjs.init("OJ8DBc3Ilixz-Lhz2");
+      emailjs.init("xQ7QIVsWyjaThv_u9");
     })();
 
     function sendMail() {
@@ -206,10 +219,13 @@
 
       emailjs.send("service_formycro", "template_yrp8xsf", params)
         .then(function(response) {
-          alert("✅ Your order has been sent successfully!");
+          document.getElementById("responseMessage").textContent = "✅ Your order has been placed successfully!";
+          document.getElementById("responseMessage").className = "success-message";
+          document.getElementById("orderForm").reset();
         }, function(error) {
-          alert("❌ Failed to send. Please try again later.");
-          console.log(error);
+          document.getElementById("responseMessage").textContent = "❌ Order failed. Please try again.";
+          document.getElementById("responseMessage").className = "error-message";
+          console.error("EmailJS Error:", error);
         });
     }
   </script>
