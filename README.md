@@ -1,241 +1,371 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mycro Arts | Micro Art</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mycro Arts – Tiny Masterpieces</title>
   <style>
-    body {
+    /* Reset and Base Styles */
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(120deg, #ffecd2, #fcb69f);
-      color: #333;
+      padding: 0;
+      box-sizing: border-box;
     }
 
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Subtle artistic background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 80%, rgba(64, 200, 200, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(64, 200, 200, 0.05) 0%, transparent 50%);
+      z-index: -1;
+      animation: subtleShift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes subtleShift {
+      0% { transform: translateX(0) translateY(0); }
+      100% { transform: translateX(10px) translateY(5px); }
+    }
+
+    /* Header */
     header {
-      background: #ff5e57;
+      background: linear-gradient(135deg, #40c8c8 0%, #2a9d8f 100%);
       color: white;
       text-align: center;
-      padding: 1.5rem 1rem;
-      font-size: 2rem;
-      font-weight: bold;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
+      padding: 2rem 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
-    header img {
-      height: 50px;
-      width: 50px;
-      border-radius: 50%;
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      margin: 0;
+      animation: fadeInDown 1s ease-out;
     }
 
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Main Container */
     .container {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Sections */
+    section {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 3rem;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
     }
 
     h2 {
-      color: #ff5e57;
-    }
-
-    .scroll-gallery-wrapper {
-      overflow: hidden;
-      height: 220px;
+      color: #2a9d8f;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
       position: relative;
-      margin-bottom: 2rem;
     }
 
-    .scroll-row {
-      display: flex;
-      width: max-content;
-      gap: 1rem;
-      animation: scroll-left 20s linear infinite;
+    h2::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #40c8c8;
+      margin: 0.5rem auto;
+      border-radius: 2px;
     }
 
-    .scroll-row.reverse {
-      animation: scroll-right 25s linear infinite;
-      margin-top: 1rem;
+    /* About Section (Creative Addition) */
+    .about {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
     }
 
-    .scroll-row img {
-      width: 200px;
-      height: 200px;
+    .about p {
+      margin-bottom: 1rem;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 250px;
       object-fit: cover;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
     }
 
-    @keyframes scroll-left {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(64, 200, 200, 0.3);
     }
 
-    @keyframes scroll-right {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(50%); }
+    .gallery img::after {
+      content: 'View Details';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      background: rgba(42, 157, 143, 0.8);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
+    .gallery img:hover::after {
+      opacity: 1;
+    }
+
+    /* Form */
     form {
-      display: flex;
-      flex-direction: column;
+      display: grid;
       gap: 1rem;
     }
 
     input, select, textarea {
-      padding: 0.7rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
       font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #40c8c8;
+      box-shadow: 0 0 0 3px rgba(64, 200, 200, 0.1);
+    }
+
+    input[type="tel"] {
+      /* Basic phone pattern for validation */
+      pattern="[0-9]{10,}";
+    }
+
+    input[type="email"] {
+      /* Assuming email might be added; pattern for validation */
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
     }
 
     button {
-      background: #ff5e57;
+      background: linear-gradient(135deg, #40c8c8 0%, #2a9d8f 100%);
       color: white;
-      padding: 0.9rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    .note {
-      background: #ffe0dc;
       padding: 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      font-size: 0.95rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(64, 200, 200, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    /* Note Section */
+    .note {
+      background: linear-gradient(135deg, #e8f5e8 0%, #d4f4d4 100%);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 5px solid #40c8c8;
+    }
+
+    .note strong {
+      color: #2a9d8f;
+    }
+
+    .note a {
+      color: #40c8c8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
+      padding: 2rem 1rem;
+      background: #2a9d8f;
+      color: white;
       margin-top: 3rem;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #555;
     }
 
-    footer a {
-      color: #ff5e57;
-      text-decoration: none;
+    .social-links {
+      margin: 1rem 0;
     }
 
-    #formMessage {
-      display: none;
-      font-weight: bold;
-      padding: 10px;
-      margin-top: 1rem;
-      border-radius: 8px;
+    .social-links a {
+      display: inline-block;
+      margin: 0 1rem;
+      color: white;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
     }
 
-    #formMessage.success {
-      color: green;
+    .social-links a:hover {
+      transform: scale(1.2);
     }
 
-    #formMessage.error {
-      color: red;
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .container {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+      }
+
+      section {
+        padding: 1.5rem;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1.5rem 0.5rem;
+      }
+
+      input, select, textarea, button {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
-    <img src="mycrologo.png" alt="Mycro Arts Logo">
-    Mycro Arts – Tiny Masterpieces
+    <h1>Mycro Arts – Tiny Masterpieces</h1>
   </header>
 
   <div class="container">
-    <h2>🎨 Our Work</h2>
-    <div class="scroll-gallery-wrapper">
-      <div class="scroll-row">
-        <img src="sample1.jpg" alt="Micro Art 1">
-        <img src="sample2.jpg" alt="Micro Art 2">
-        <img src="sample3.jpg" alt="Micro Art 3">
-        <img src="sample4.jpg" alt="Micro Art 4">
-        <img src="sample1.jpg" alt="Micro Art 1">
-        <img src="sample2.jpg" alt="Micro Art 2">
+    <!-- About Section (Creative Addition) -->
+    <section class="about">
+      <h2>🌟 About Us</h2>
+      <p>At Mycro Arts, we specialize in intricate micro artworks that capture the essence of personalization. From custom chalk names to delicate pencil lid designs, our tiny masterpieces bring joy to everyday moments. Serving the Nagapattinam area with passion and precision.</p>
+    </section>
+
+    <!-- Gallery Section -->
+    <section>
+      <h2>🎨 Our Work</h2>
+      <div class="gallery">
+        <img src="sample1.jpg" alt="Custom chalk art with personalized name in vibrant colors">
+        <img src="sample2.jpg" alt="Pencil lid art featuring fine details and miniature portraits">
+        <img src="sample3.jpg" alt="Micro art sample blending chalk and pencil techniques">
       </div>
-      <div class="scroll-row reverse">
-        <img src="sample3.jpg" alt="Micro Art 3">
-        <img src="sample4.jpg" alt="Micro Art 4">
-        <img src="sample2.jpg" alt="Micro Art 2">
-        <img src="sample1.jpg" alt="Micro Art 1">
-        <img src="sample4.jpg" alt="Micro Art 4">
-        <img src="sample3.jpg" alt="Micro Art 3">
-      </div>
-    </div>
+    </section>
 
-    <h2>🛒 Place Your Order</h2>
-    <form id="orderForm" action="https://formspree.io/f/xblkrqbp" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="tel" name="phone" placeholder="Phone Number" required />
-      <input type="text" name="location" placeholder="Location" required />
-      <input type="text" name="pincode" placeholder="Pincode" required />
+    <!-- Order Form Section -->
+    <section>
+      <h2>🛒 Place Your Order</h2>
+      <form action="#" method="POST" novalidate> <!-- Add real action (e.g., to Formspree) for submission -->
+        <input type="text" name="name" placeholder="Your Full Name" required maxlength="50">
+        <input type="tel" name="phone" placeholder="Phone Number (10 digits)" required>
+        <input type="text" name="location" placeholder="Location (e.g., Street, City)" required>
+        <input type="text" name="pincode" placeholder="Pincode (e.g., 611001)" required pattern="[0-9]{6}">
+        
+        <label for="product">Type of Product:</label>
+        <select name="product" id="product" required>
+          <option value="">-- Select Product --</option>
+          <option value="chalk">Chalk Art (Custom Name)</option>
+          <option value="pencil">Pencil Lid Art (Custom Name)</option>
+        </select>
 
-      <label for="product">Type of Product:</label>
-      <select name="product" required>
-        <option value="">-- Select --</option>
-        <option value="chalk">Chalk Art (Custom Name)</option>
-        <option value="pencil">Pencil Lid Art (Custom Name)</option>
-      </select>
+        <textarea name="request" placeholder="Any special requests or details? (e.g., colors, themes)" rows="4"></textarea>
 
-      <textarea name="request" placeholder="Any special request?" rows="3"></textarea>
+        <button type="submit">Submit Your Request</button>
+      </form>
+      <!-- Placeholder for form feedback; in real use, handle with JS or backend -->
+      <p style="text-align: center; color: #40c8c8; margin-top: 1rem; display: none;">Thank you! We'll contact you soon.</p>
+    </section>
 
-      <button type="submit">Submit Request</button>
-      <p id="formMessage"></p>
-    </form>
-
-    <div class="note">
-      📍 <strong>Order Method:</strong><br>
-      1. Direct message us on Instagram: <a href="https://instagram.com/mycro_arts" target="_blank">@mycro_arts</a><br>
-      2. Web page order available only for <strong>Nagapattinam-611 101</strong> surroundings (District of Tamil Nadu)<br><br>
-      📧 Email: <a href="mailto:miiicroartz@gmail.com">miiicroartz@gmail.com</a>
-    </div>
+    <!-- Note Section -->
+    <section class="note">
+      <h3>📍 Order & Contact Info</h3>
+      <p><strong>Preferred Methods:</strong><br>
+      1. DM us on Instagram for quick quotes: <a href="https://instagram.com/mycro_arts" target="_blank" rel="noopener">@mycro_arts</a><br>
+      2. Web orders limited to Nagapattinam-611 101 and surroundings (Tamil Nadu District).<br><br>
+      📧 Email: <a href="mailto:miiicroartz@gmail.com">miiicroartz@gmail.com</a><br>
+      We respond within 24 hours!</p>
+    </section>
   </div>
 
   <footer>
-    © 2025 Mycro Arts | Designed with ❤️ by 
-    <a href="https://instagram.com/perf.cut" target="_blank">Perfcut</a>
+    <div class="social-links">
+      <a href="https://instagram.com/mycro_arts" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+      <a href="mailto:miiicroartz@gmail.com" aria-label="Email">✉️</a>
+    </div>
+    <p>&copy; 2025 Mycro Arts | Crafted with ❤️ for @perf.cut</p>
   </footer>
-
-  <!-- Success Message Script -->
-  <script>
-    const form = document.getElementById("orderForm");
-    const msg = document.getElementById("formMessage");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const data = new FormData(form);
-      fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
-        if (response.ok) {
-          msg.textContent = "✅ Your order has been placed successfully!";
-          msg.className = "success";
-          msg.style.display = "block";
-          form.reset();
-        } else {
-          msg.textContent = "❌ Failed to send your order. Try again.";
-          msg.className = "error";
-          msg.style.display = "block";
-        }
-      }).catch(error => {
-        msg.textContent = "❌ Error! Please check your connection.";
-        msg.className = "error";
-        msg.style.display = "block";
-      });
-    });
-  </script>
-
 </body>
 </html>
