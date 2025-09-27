@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mycro Arts – Tiny Masterpieces</title>
   <style>
     * {
@@ -98,7 +98,7 @@
     .about p {
       margin-bottom: 1rem;
     }
-    /* Gallery Fix: show full PNG/JPG images */
+    /* Gallery */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -119,7 +119,6 @@
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(64, 200, 200, 0.3);
     }
-    /* Remove pseudo-element ::after for "View Details" (not supported on img) */
     form {
       display: grid;
       gap: 1rem;
@@ -137,7 +136,7 @@
       box-shadow: 0 0 0 3px rgba(64, 200, 200, 0.1);
     }
     input[type="tel"] {
-      pattern="[0-9]{10,}";
+      pattern: "[0-9]{10,}";
     }
     textarea {
       resize: vertical;
@@ -257,8 +256,38 @@
     <section>
       <h2>🛒 Place Your Order</h2>
       <form action="#" method="POST" novalidate>
-        <input type="text" name="name" placeholder="Your Full Name" required maxlength="50">
-        <input type="tel" name="phone" placeholder="Phone Number (10 digits)" required>
-        <input type="text" name="location" placeholder="Location (e.g., Street, City)" required>
-        <input type="text" name="pincode" placeholder="Pincode (e.g., 611001)" required pattern="[0-9]{6}">
-        <label for="product
+        <input type="text" name="name" placeholder="Your Full Name" required maxlength="50" />
+        <input type="tel" name="phone" placeholder="Phone Number (10 digits)" required pattern="[0-9]{10}" />
+        <input type="text" name="location" placeholder="Location (e.g., Street, City)" required />
+        <input type="text" name="pincode" placeholder="Pincode (e.g., 611001)" required pattern="[0-9]{6}" />
+
+        <label for="product">Select Product</label>
+        <select id="product" name="product" required>
+          <option value="">-- Choose an item --</option>
+          <option value="chalk_name">Chalk Name Art</option>
+          <option value="pencil_lid">Pencil Lid Design</option>
+          <option value="custom_micro_art">Custom Micro Art</option>
+        </select>
+
+        <textarea name="message" placeholder="Additional details (e.g., name to write, color preferences)"></textarea>
+
+        <button type="submit">Submit Order</button>
+      </form>
+
+      <div class="note">
+        <strong>Note:</strong> Once you submit, our team will contact you to confirm your order and provide payment details. For faster responses, reach us on 
+        <a href="https://instagram.com/mycroarts" target="_blank">Instagram</a>.
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Mycro Arts. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" aria-label="Instagram">📸</a>
+      <a href="#" aria-label="Facebook">📘</a>
+      <a href="#" aria-label="WhatsApp">💬</a>
+    </div>
+  </footer>
+</body>
+</html>
