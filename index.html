@@ -3,245 +3,309 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mycro Art</title>
+  <title>Mycro Arts</title>
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #009688;
+      --accent: #38b6ff;
+      --surface: #fff;
+      --on-surface: #1a1a1a;
+      --note: #eafaf6;
+    }
+    html, body { height: 100%; }
     body {
+      min-height: 100vh;
       font-family: "Poppins", sans-serif;
-      color: #333;
-      background: linear-gradient(135deg, #e8f5f5, #dff2f2);
+      background: #eef9fb;
+      color: var(--on-surface);
+      position: relative;
+      z-index: 1;
       overflow-x: hidden;
     }
-
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #38b6ff, #009688);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      position: relative;
+    /* Floating BG Animation */
+    .background-bubbles {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      margin: 0; padding: 0;
       overflow: hidden;
     }
-    header::before {
-      content: "";
+    .background-bubbles li {
       position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
-      top: -50%;
-      left: -50%;
-      animation: bgMove 10s linear infinite alternate;
+      display: block;
+      list-style: none;
+      width: 40px; height: 40px;
+      background: radial-gradient(circle at 30% 70%, #47ebffcc, transparent 70%);
+      border-radius: 63% 37% 60% 40%/ 60% 40% 61% 39%;
+      opacity: 0.17;
+      animation: floatBubble 18s linear infinite;
+      box-shadow: 0 10px 36px 8px #38b6ff33;
     }
-    @keyframes bgMove {
-      from { transform: translate(0, 0) rotate(0deg); }
-      to { transform: translate(20px, 20px) rotate(15deg); }
+    .background-bubbles li:nth-child(1){left:6%;animation-duration:14s;width:42px;height:42px;animation-delay:0s;}
+    .background-bubbles li:nth-child(2){left:77%;animation-duration:19s;width:55px;height:55px;animation-delay:2s;}
+    .background-bubbles li:nth-child(3){left:62%;animation-duration:16s;width:40px;height:40px;animation-delay:4s;}
+    .background-bubbles li:nth-child(4){left:17%;animation-duration:14s;width:32px;height:32px;animation-delay:6s;}
+    .background-bubbles li:nth-child(5){left:90%;animation-duration:11s;width:36px;height:36px;animation-delay:7s;}
+    .background-bubbles li:nth-child(6){left:30%;animation-duration:18s;width:66px;height:66px;animation-delay:1s;}
+    .background-bubbles li:nth-child(7){left:47%;animation-duration:11s;width:36px;height:36px;animation-delay:5s;}
+    .background-bubbles li:nth-child(8){left:20%;animation-duration:17s;width:60px;height:60px;animation-delay:8s;}
+    .background-bubbles li:nth-child(9){left:80%;animation-duration:15s;width:32px;height:32px;animation-delay:3s;}
+    .background-bubbles li:nth-child(10){left:56%;animation-duration:13s;width:41px;height:41px;animation-delay:6s;}
+    @keyframes floatBubble {
+      0% { bottom: -120px; opacity: 0.05; transform: scale(1);}
+      20% {opacity: 0.19;}
+      40% {opacity: 0.32; transform: translateY(-120px) scale(1.06);}
+      80% {opacity: 0.17;}
+      100% { bottom: 100vh; opacity: 0; transform: scale(1.03); }
+    }
+
+    /* HEADER */
+    header {
+      background: radial-gradient(ellipse at top left, #38b6ff33 40%, transparent 80%),
+                  linear-gradient(135deg, #009688 66%, #38b6ff 100%);
+      color: #fff;
+      text-align: center;
+      padding: 2.2rem 1rem 1.2rem 1rem;
+      border-radius:0 0 28px 28px;
+      box-shadow: 0 8px 24px #00968811;
+      position: relative;
+      z-index: 2;
     }
     header img {
-      width: 80px;
-      height: 80px;
-      background: white;
+      width: 72px; height: 72px;
+      background: #fff;
       border-radius: 14px;
-      padding: 5px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 6px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
       animation: float 3s ease-in-out infinite;
+      margin-bottom:0.7rem;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
+    @keyframes float {0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
     header h1 {
-      margin-top: 1rem;
-      font-size: 2.3rem;
-      font-weight: 600;
-      letter-spacing: 1px;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      margin-bottom:0.1rem;
     }
 
-    /* Container */
+    /* MAIN CONTENT */
     .container {
-      max-width: 1100px;
+      max-width: 1050px;
       margin: 2rem auto;
       padding: 0 1rem;
-      animation: fadeIn 1.2s ease both;
+      position: relative;
+      z-index: 3;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(25px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Section Base */
     section {
-      background: #fff;
-      margin-bottom: 2.5rem;
-      padding: 2rem;
+      background: var(--surface);
       border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 22px rgba(0,0,0,0.07);
+      padding: 2.1rem 1.5rem;
+      margin-bottom: 2.2rem;
+      transition: transform 0.28s cubic-bezier(.55,.06,.67,.74), box-shadow 0.3s ease;
     }
-    section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    }
-
+    section:hover {transform:translateY(-3px);box-shadow:0 10px 35px rgba(0,150,136,0.10);}
     h2 {
       text-align: center;
-      color: #009688;
-      font-size: 1.9rem;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    h2::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: #38b6ff;
-      margin: 0.5rem auto;
-      border-radius: 2px;
+      color: var(--primary);
+      font-size:1.6rem;
+      margin-bottom: 0.8rem;
     }
 
     /* About */
-    .about {
-      text-align: center;
-      color: #555;
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
     .about p {
-      max-width: 750px;
+      text-align: center;
+      color: #464646;
+      font-size: 1.02rem;
+      max-width: 700px;
       margin: 0 auto;
     }
 
-    /* Gallery */
+    /* Responsive Gallery (perfect fit, professional) */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      justify-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      padding: 0.4rem;
     }
     .gallery img {
       width: 100%;
-      height: 250px;
+      aspect-ratio: 4/3;
       object-fit: cover;
-      border-radius: 14px;
-      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
+      box-shadow: 0 2px 14.5px #38b6ff17;
+      background: #f4f7fa;
+      display: block;
+      transition: all .22s cubic-bezier(.77,.2,.16,1.12);
       cursor: pointer;
     }
     .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 25px rgba(0, 150, 136, 0.3);
+      transform: scale(1.045) rotate(-1.2deg);
+      box-shadow: 0 10px 28px rgba(0,160,166,0.15);
     }
 
     /* Order Form */
     form {
-      display: grid;
-      gap: 1rem;
-      margin-top: 1rem;
+      display: grid; gap: 1.05rem; margin-top: 1rem;
     }
     input, select, textarea {
-      padding: 1rem;
+      padding: 0.95rem;
+      border-radius: 9px;
       border: 2px solid #e0e0e0;
-      border-radius: 10px;
       font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.23s;
       width: 100%;
+      background: #f8feff;
+      color: #333;
     }
     input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow:0 0 7px #38b6ff26;
       outline: none;
-      border-color: #009688;
-      box-shadow: 0 0 6px rgba(0,150,136,0.2);
     }
     button {
-      background: linear-gradient(135deg, #38b6ff, #009688);
-      color: white;
+      background: linear-gradient(135deg, var(--accent) 20%, var(--primary) 85%);
+      color: #fff;
       padding: 1rem;
       border: none;
-      border-radius: 10px;
-      font-size: 1.1rem;
+      border-radius: 9px;
+      font-size: 1.09rem;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.18s;
+      margin-top:0.3rem;
     }
     button:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 5px 20px #00968833;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 150, 136, 0.3);
     }
-
-    /* Note */
     .note {
-      background: #eafaf6;
-      border-left: 5px solid #009688;
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      margin-top: 1.5rem;
-      font-size: 0.95rem;
-      color: #444;
+      background: var(--note);
+      border-left: 4px solid var(--primary);
+      padding: 0.93rem 1.2rem;
+      border-radius: 8px;
+      margin-top: 1.4rem;
+      color: #37474f;
+      font-size: 0.99rem;
     }
     .note a {
-      color: #009688;
-      font-weight: 600;
+      color: var(--primary);
+      font-weight: 550;
       text-decoration: none;
     }
-    .note a:hover { text-decoration: underline; }
-
-    /* Footer */
+    .note a:hover { text-decoration: underline; color: var(--accent);}
+    /* Credits */
+    .credits {
+      text-align:center;
+      margin: 1.3rem 0 -1.8rem 0;
+      font-size:1.04rem;
+      color: #7fa2b2;
+      letter-spacing:0.03em;
+    }
+    .credits a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      margin-left: 0.25em;
+      transition:color 0.2s;
+    }
+    .credits a:hover {color:var(--accent);}
+    /* FOOTER */
     footer {
       text-align: center;
-      background: #009688;
-      color: white;
-      padding: 2rem 1rem;
+      padding: 2.1rem 1rem 1.1rem 1rem;
+      color: #fff;
+      background: linear-gradient(90deg,#009688 60%,#38b6ff 100%);
+      border-radius: 26px 26px 0 0;
+      box-shadow: 0 -6px 30px #00968818;
+      font-size:1.03rem;
+      margin-top:2.5rem;
+      position:relative;
+      z-index:3;
     }
-    footer .social-links a {
-      display: inline-block;
-      color: white;
-      font-size: 1.6rem;
-      margin: 0 10px;
-      transition: transform 0.3s ease;
+    .footer-social {
+      margin-top: 13px;
+      display:flex;justify-content:center;align-items:center;gap:0.7rem;
+      flex-wrap:wrap;
     }
-    footer .social-links a:hover { transform: scale(1.2); }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header h1 { font-size: 1.8rem; }
-      section { padding: 1.5rem; }
-      .gallery img { height: 200px; }
+    .footer-social a {
+      display:flex;align-items:center;
+      color:#fff;
+      background:rgba(0,0,0,.07);
+      border-radius:20px;
+      padding:6px 16px 6px 10px;
+      font-weight:500;
+      font-size:1.09rem;
+      margin:0 4px;
+      text-decoration: none;
+      gap:0.56rem;
+      transition: all 0.16s cubic-bezier(.8,.3,.16,1.01);
     }
-    @media (max-width: 480px) {
-      input, select, textarea, button { font-size: 0.9rem; padding: 0.8rem; }
-      .container { padding: 0 0.5rem; }
+    .footer-social a:hover {
+      background: #fff;
+      color: var(--primary);
+      transform:translateY(-3px) scale(1.085);
+    }
+    .footer-social .fa-brands {
+      font-size: 1.2em;
+      margin-right:0.3em;
+      background: none;
+      vertical-align:middle;
+      color: inherit;
+    }
+    @media (max-width: 800px) {
+      .container {max-width:96vw;}
+      .gallery img {aspect-ratio:3/2;}
+      section {padding: 1.2rem;}
+    }
+    @media (max-width: 520px) {
+      header img { width: 48px; height:48px;}
+      header h1 { font-size: 1.18rem; }
+      footer {font-size:0.98rem;}
+      .gallery img { aspect-ratio: 4/3;}
+      .container{padding: 0 0.5rem;}
+      section{padding: 1rem;}
+      .footer-social a {font-size:0.97rem;padding:5px 10px 5px 8px;}
+      .credits {font-size:0.95rem;}
     }
   </style>
 </head>
 <body>
+  <ul class="background-bubbles">
+    <li></li><li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li><li></li>
+  </ul>
   <header>
     <img src="images/mycrologo.png" alt="Mycro Arts Logo" />
     <h1>Mycro Arts – Tiny Masterpieces</h1>
   </header>
-
-  <div class="container">
+  <main class="container">
     <!-- About -->
     <section class="about">
       <h2>About Us</h2>
-      <p>At Mycro Arts, we craft miniature artworks with passion and precision — from chalk names to pencil lid designs. Every creation is handmade and personalized, designed to bring delight in the tiniest details.</p>
+      <p>Original handcrafted miniature art, designed uniquely for you—from chalk name pieces to pencil lid carvings, each made with care and detail.</p>
     </section>
-
     <!-- Gallery -->
     <section>
       <h2>Our Work</h2>
       <div class="gallery">
-        <img src="images/sample1.jpg" alt="Micro Art 1" />
-        <img src="images/sample2.jpg" alt="Micro Art 2" />
-        <img src="images/sample3.jpg" alt="Micro Art 3" />
-        <img src="images/sample4.jpg" alt="Micro Art 4" />
+        <img src="images/sample1.jpg" alt="Micro Art 1" loading="lazy" />
+        <img src="images/sample2.jpg" alt="Micro Art 2" loading="lazy" />
+        <img src="images/sample3.jpg" alt="Micro Art 3" loading="lazy" />
+        <img src="images/sample4.jpg" alt="Micro Art 4" loading="lazy" />
       </div>
     </section>
-
     <!-- Order -->
     <section>
       <h2>Place Your Order</h2>
       <form action="https://formspree.io/f/yourformid" method="POST">
         <input type="text" name="name" placeholder="Your Full Name" required />
-        <input type="tel" name="phone" placeholder="Phone Number (10 digits)" pattern="[0-9]{10}" required />
-        <input type="text" name="location" placeholder="Your Location" required />
+        <input type="tel" name="phone" placeholder="WhatsApp Number (10 digits)" pattern="[0-9]{10}" required />
+        <input type="text" name="location" placeholder="City/District" required />
         <input type="text" name="pincode" placeholder="Pincode" pattern="[0-9]{6}" required />
         <select name="product" required>
           <option value="">-- Select Product --</option>
@@ -249,22 +313,30 @@
           <option value="pencil_lid">Pencil Lid Design</option>
           <option value="custom_micro_art">Custom Micro Art</option>
         </select>
-        <textarea name="message" placeholder="Additional details (e.g., name to write, color preferences)"></textarea>
+        <textarea name="message" placeholder="Details (e.g., name, colors, text, idea)"></textarea>
         <button type="submit">Submit Order</button>
       </form>
-
       <div class="note">
-        <strong>Note:</strong> You’ll receive a confirmation via WhatsApp or Instagram after submission.  
-        For quick contact, DM us on. <a href="https://instagram.com/mycro_arts" target="_blank">@mycro_arts</a>.
+        <b>Note:</b> You'll get an order confirmation by WhatsApp or Instagram within 24h. For urgent questions, DM <a href="https://instagram.com/mycro_arts" target="_blank">@mycro_arts</a> or WhatsApp us.
       </div>
     </section>
-  </div>
-
+    <!-- Credits Section -->
+    <div class="credits">
+      Website crafted with care. <br />
+      Credits to <a href="https://www.instagram.com/perf.cut?igsh=MW85YmZrODdkZTN3Nw==" target="_blank">@perf.cut</a> on Instagram for web development.
+    </div>
+  </main>
   <footer>
-    <p>&copy; 2025 Mycro Arts. All rights reserved.</p>
-    <div class="social-links">
-      <a href="https://instagram.com/mycro_arts" target="_blank" aria-label="Instagram"></a>
-      <a href="https://wa.me/916369030531" target="_blank" aria-label="WhatsApp"></a>
+    <div>&copy; 2025 Mycro Arts. All rights reserved.</div>
+    <div class="footer-social">
+      <a href="https://wa.me/916369030531" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i>
+        WhatsApp: 6369030531
+      </a>
+      <a href="https://instagram.com/mycro_arts" target="_blank" rel="noopener">
+        <i class="fa-brands fa-instagram"></i>
+        Instagram: @mycro_arts
+      </a>
     </div>
   </footer>
 </body>
